@@ -2,7 +2,7 @@ import random
 
 class Deck:
     def __init__(self):
-        # init variables
+        	# init variables
 		self.cards = []
 		self.numCards = 0
 
@@ -14,10 +14,11 @@ class Deck:
 
 	def populate_cards(self):
 			for suit in range (0, 5):
-				for value in range (0, 13):
-					blackjack_card = BlackjackCard(value, suit)
-					self.cards.append(blackjack_card)
-		
+				for face in range (0, 13):
+					card = Card(face, suit)
+					self.cards.append(card)
+					self.numCards = self.numCards + 1	
+
 	def cards_left(self):
 		print (self.numCards)
 
