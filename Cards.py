@@ -4,23 +4,24 @@ class Deck:
     def __init__(self):
         # init variables
         self.cards = []
-        self.numCards = 0
-
-        # init methods
         self.populate_cards()
+        self.shuffle_cards()
 
         def deal(self):
-            return self.cards.pop(random.randint(0, (self.numCards - 1)))
+            return self.cards.pop(0)
+
+        def shuffle(self):
+            random.shuffle(self.cards)
 
         def populate_cards(self):
             for suit in range (0, 5):
                 for face in range (0, 13):
                     card = Card(face, suit)
                     self.cards.append(card)
-                    self.numCards = self.numCards + 1	
+                    self.numCards = self.numCards + 1 
 
         def cards_left(self):
-            print (self.numCards)
+            print (len(self.cards))
 
 class Card:
     def __init__(self, face = 0, suit = 0):
