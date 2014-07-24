@@ -2,39 +2,29 @@ import random
 
 class Deck:
     def __init__(self):
-        # init variables
         self.cards = []
         self.populate_cards()
-        self.shuffle_cards()
+        self.shuffle()
 
-        def deal(self):
-            return self.cards.pop(0)
+    def deal(self):
+        return self.cards.pop(0)
 
-        def shuffle(self):
-            random.shuffle(self.cards)
+    def shuffle(self):
+        random.shuffle(self.cards)
 
-        def populate_cards(self):
-            for suit in range (0, 5):
-                for face in range (0, 13):
-                    card = Card(face, suit)
-                    self.cards.append(card)
-                    self.numCards = self.numCards + 1 
+    def populate_cards(self):
+        for suit in range (1, 5):
+            for face in range (1, 14):
+                card = Card(face, suit)
+                self.cards.append(card)
 
-        def cards_left(self):
-            print (len(self.cards))
+    def cards_left(self):
+        print (len(self.cards))
 
 class Card:
-    def __init__(self, face = 0, suit = 0):
+    def __init__(self, face, suit):
         self.face = face
         self.suit = suit
-
-    def assign_value_using_face(self):
-        pass
-
-class BlackjackCard(Card):
-    def __init__(self, face = 0, suit = 0):
-        super().__init__(self, face, suit)
-        self.value = None  
 
 class Suit:
     Diamond = 1
