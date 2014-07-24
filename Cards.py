@@ -25,24 +25,51 @@ class Card:
     def __init__(self, face, suit):
         self.face = face
         self.suit = suit
+        self.face_name = None
+        self.suit_name = None
+        self.translate_face_to_name()
+        self.translate_suit_to_name()
+
+    def translate_face_to_name(self):
+        if self.face == 1:
+           self.face_name = "ace"
+        elif self.face == 2:
+           self.face_name = "two"
+        elif self.face == 3:
+           self.face_name = "three"
+        elif self.face == 4:
+           self.face_name = "four"
+        elif self.face == 5:
+           self.face_name = "five"
+        elif self.face == 6:
+           self.face_name = "six"
+        elif self.face == 7:
+           self.face_name = "seven"
+        elif self.face == 8:
+           self.face_name = "eight"
+        elif self.face == 9:
+           self.face_name = "nine"
+        elif self.face == 10:
+           self.face_name = "ten"
+        elif self.face == 11:
+           self.face_name = "jack"
+        elif self.face == 12:
+           self.face_name = "queen"
+        elif self.face == 13:
+           self.face_name = "king"
+
+    def translate_suit_to_name(self):
+       if self.suit == Suit.Diamond:
+           self.suit_name = "diamond"
+       elif self.suit == Suit.Club:
+           self.suit_name = "club"
+       elif self.suit == Suit.Heart:
+           self.suit_name = "heart"
+       elif self.suit == Suit.Spade:
+           self.suit_name = "spade"
 
 class Suit:
     Diamond = 1
     Club = 2
     Heart = 3
     Spade = 4
-
-class Face:
-    Ace = 1
-    Two = 2
-    Three = 3
-    Four = 4
-    Five = 5
-    Six = 6
-    Seven = 7
-    Eight = 8
-    Nine = 9
-    Ten = 10
-    Jack = 11
-    Queen = 12
-    King = 13

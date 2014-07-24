@@ -1,4 +1,3 @@
-import Cards
 # Player info
 
 class Player:
@@ -89,21 +88,19 @@ class BlackjackPlayer(Player):
 
     def show_info(self):
         for card in self.hand:
-            print "The card has face " + str(card.face) + " and suit " + str(card.suit)
-
-        print "The player state is " + str(self.state)
-
+            print self.name + " drew a " + card.face_name + " of suit " + card.suit_name
+        
         print "The player's score is " + str(self.score)
+        print "The player's state is " + str(self.state)
 
 class BlackjackDealer(BlackjackPlayer):
-    def __init__(self, name):
-       BlackjackPlayer.__init__(self, name)
+    def __init__(self):
+       BlackjackPlayer.__init__(self, "dealer")
        
-
 class PlayerState:
     Active = 0
-    Stay = 1
-    Bust = 2
+    Bust = 1
+    Stay = 2
 
 class Face:
     Ace = 1
