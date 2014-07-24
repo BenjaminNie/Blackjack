@@ -10,16 +10,20 @@ class BlackjackPlayer(Player):
         Player.__init__(self, name)
         self.score = 0
         self.state = PlayerState.Active
+        self.new_card = None
 
     def hit(self, deck):
-        self.hand.append(deck.deal())
+        self.new_card = deck.deal()
+        
+        self.hand.append(self.new_card)
         self.hand.sort(key=lambda x: x.face, reverse = True)
 
+        """ DEBUG FXN
         for index,item in enumerate(self.hand):
             print "Index " + str(index) + " contains face " + str(item.face)
-            
-        self.calculate_score()
+        """
 
+        self.calculate_score()
         self.show_info()
 
     def calculate_score(self):
@@ -87,16 +91,48 @@ class BlackjackPlayer(Player):
             self.state = PlayerState.Active
 
     def show_info(self):
+        print self.name + " drew a " + self.new_card.face_name + " of " + self.new_card.suit_name
+
+        print self.name + "'s hand now contains:"
         for card in self.hand:
-            print self.name + " drew a " + card.face_name + " of suit " + card.suit_name
+            print card.face_name + " of " + card.suit_name
         
-        print "The player's score is " + str(self.score)
-        print "The player's state is " + str(self.state)
+        print self.name + "'s score is " + str(self.score)
+        print self.name + "'s state is " + str(self.state)
 
 class BlackjackDealer(BlackjackPlayer):
     def __init__(self):
        BlackjackPlayer.__init__(self, "dealer")
        
+    def determine_state(self):
+       if 16 < self.score < 22:
+            self.state = PlayerState.Stay
+
+       elif self.score > 21:
+            self.state = PlayerState.Bust
+
+       else:
+            self.state = PlayerState.Active
+
+    def initial_deal(self, deck):
+       self.hand.append(deck.deal())
+       self.hand.append(deck.deal())
+
+       print "Dealer's face-up card is a " + (self.hand[0]).face_name
+       
+       if dealer_twentyone == true:
+          #end the game immediately since dealer has 21 
+
+    def dealer_twentyone(deck):
+       self.hand.sort(key=lambda x: x.face, reverse = True)
+       self.calculate_score()
+       
+       if self.score == 21:
+          return true
+
+       else:
+          return false
+
 class PlayerState:
     Active = 0
     Bust = 1
