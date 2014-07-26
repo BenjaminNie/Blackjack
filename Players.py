@@ -120,7 +120,7 @@ class BlackjackDealer(BlackjackPlayer):
 
        print "Dealer's face-up card is a " + (self.hand[0]).face_name
        
-       if dealer_twentyone == true:
+       if dealer_twentyone(deck) == true:
           #end the game immediately since dealer has 21 
 
     def dealer_twentyone(deck):
