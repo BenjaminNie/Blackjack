@@ -86,20 +86,24 @@ class BlackjackPlayer(Player):
 
         elif self.score > 21:
             self.state = PlayerState.Bust
+            print self.name + "has busted!\n"
+
 
         else:
             self.state = PlayerState.Active
 
     def show_info(self):
         print self.name + " drew a " + self.new_card.face_name + " of " + self.new_card.suit_name
-
         print self.name + "'s hand now contains:"
+
         for card in self.hand:
             print str(card.face) + card.suit_name,
 
+        self.show_score()
+
+    def show_score(self):
         print
         print self.name + "'s score is " + str(self.score)
-        print self.name + "'s state is " + str(self.state)
         print
 
 class BlackjackDealer(BlackjackPlayer):
@@ -116,10 +120,6 @@ class BlackjackDealer(BlackjackPlayer):
        else:
             self.state = PlayerState.Active
 
-    def initial_deal(self, deck):
-       self.hand.append(deck.deal())
-       self.hand.append(deck.deal())
-
     def dealer_twentyone(self):
        self.hand.sort(key=lambda x: x.face, reverse = True)
        self.calculate_score()
@@ -129,6 +129,15 @@ class BlackjackDealer(BlackjackPlayer):
 
        else:
           return False
+
+    def initial_hit(self, deck):
+        self.hand.append(self.new_card)
+        self.new_card = deck.deal()
+        self.hand.append(self.new_card)
+
+        print "Dealer's face-up card is a " + self.hand[0].face_name
+
+        self.calculate_score()
 
 class PlayerState:
     Active = 0

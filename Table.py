@@ -44,8 +44,9 @@ class Game:
         for player in self.players:
             while player.state == PlayerState.Active:
                 print "It is " + player.name + "'s turn"
-                print player.name + " has a score of " + str(player.score)
-                choice = int(raw_input("Press 1 to hit and 0 to stay"))
+                print player.name + " has a score of " + str(player.score) + "\n"
+                choice = int(raw_input("Press 1 to hit and 0 to stay\n"))
+                self.print_extra_line()
 
                 if choice == 1:
                     player.hit(self.deck)
@@ -73,10 +74,7 @@ class Game:
         self.initial_deal_players()
 
     def initial_deal_dealer(self):
-        for x in range(2):
-            self.dealer.hit(self.deck)
-
-        print "Dealer's face-up card is a " + self.dealer.hand[0].face_name
+        self.dealer.initial_hit(self.deck)
 
         if (self.dealer.dealer_twentyone() == True):
             print "Dealer hit Blackjack!"
@@ -113,6 +111,11 @@ class Game:
                     print player.name + " beat the dealer"
                 else:
                     print player.name + " lost to dealer"
+
+        self.print_extra_line()
+
+    def print_extra_line(self):
+        print
 
 class GameState:
     Active = 0
