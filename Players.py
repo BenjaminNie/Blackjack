@@ -5,6 +5,9 @@ class Player:
         self.hand = []
         self.name = name
 
+    def print_extra_line(self):
+        print
+
 class BlackjackPlayer(Player):
     def __init__(self, name):
         Player.__init__(self, name)
@@ -86,7 +89,7 @@ class BlackjackPlayer(Player):
 
         elif self.score > 21:
             self.state = PlayerState.Bust
-            print self.name + "has busted!\n"
+            print self.name + " has busted!\n"
 
 
         else:
@@ -131,11 +134,12 @@ class BlackjackDealer(BlackjackPlayer):
           return False
 
     def initial_hit(self, deck):
-        self.hand.append(self.new_card)
+        self.hand.append(deck.deal())
         self.new_card = deck.deal()
         self.hand.append(self.new_card)
 
         print "Dealer's face-up card is a " + self.hand[0].face_name
+        self.print_extra_line()
 
         self.calculate_score()
 

@@ -25,7 +25,8 @@ class Game:
 
     def start_game(self):
         print "Welcome to Ben's Blackjack game"
-        num_players = int(raw_input("How many players will be playing today?"))
+        num_players = int(raw_input("How many players will be playing today?\n"))
+        self.print_extra_line()
 
         # create players
         self.create_players(num_players)
@@ -35,9 +36,11 @@ class Game:
 
     def create_players(self, num_players):
         i = 1
+
         while (i <= num_players):
-            name = raw_input("What is player " + str(i) + "'s name?")
+            name = raw_input("What is player " + str(i) + "'s name?\n")
             self.add_player(name)
+            self.print_extra_line()
             i += 1
 
     def players_turn(self):
