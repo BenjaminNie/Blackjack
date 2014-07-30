@@ -14,7 +14,7 @@ class BlackjackPlayer(Player):
 
     def hit(self, deck):
         self.new_card = deck.deal()
-        
+
         self.hand.append(self.new_card)
         self.hand.sort(key=lambda x: x.face, reverse = True)
 
@@ -27,13 +27,13 @@ class BlackjackPlayer(Player):
         self.show_info()
 
     def calculate_score(self):
-        # calculate the total sum in hand    
+        # calculate the total sum in hand
         self.score = 0
 
         for card in self.hand:
            if card.face == Face.Two:
               self.score += 2
-           
+
            elif card.face == Face.Three:
               self.score += 3
 
@@ -65,8 +65,8 @@ class BlackjackPlayer(Player):
               self.score += 10
 
            elif card.face == Face.King:
-              self.score += 10 
-           
+              self.score += 10
+
            elif card.face == Face.Ace:
               self.calculate_ace()
               break
@@ -95,15 +95,17 @@ class BlackjackPlayer(Player):
 
         print self.name + "'s hand now contains:"
         for card in self.hand:
-            print card.face_name + " of " + card.suit_name
-        
+            print str(card.face) + card.suit_name,
+
+        print
         print self.name + "'s score is " + str(self.score)
         print self.name + "'s state is " + str(self.state)
+        print
 
 class BlackjackDealer(BlackjackPlayer):
     def __init__(self):
        BlackjackPlayer.__init__(self, "dealer")
-       
+
     def determine_state(self):
        if 16 < self.score < 22:
             self.state = PlayerState.Stay
@@ -118,20 +120,15 @@ class BlackjackDealer(BlackjackPlayer):
        self.hand.append(deck.deal())
        self.hand.append(deck.deal())
 
-       print "Dealer's face-up card is a " + (self.hand[0]).face_name
-       
-       if dealer_twentyone(deck) == true:
-          #end the game immediately since dealer has 21 
-
-    def dealer_twentyone(deck):
+    def dealer_twentyone(self):
        self.hand.sort(key=lambda x: x.face, reverse = True)
        self.calculate_score()
-       
+
        if self.score == 21:
-          return true
+          return True
 
        else:
-          return false
+          return False
 
 class PlayerState:
     Active = 0
@@ -152,3 +149,4 @@ class Face:
     Jack = 11
     Queen = 12
     King = 13
+

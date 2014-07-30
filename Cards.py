@@ -18,9 +18,6 @@ class Deck:
                 card = Card(face, suit)
                 self.cards.append(card)
 
-    def cards_left(self):
-        print (len(self.cards))
-
 class Card:
     def __init__(self, face, suit):
         self.face = face
